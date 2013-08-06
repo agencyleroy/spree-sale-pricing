@@ -33,7 +33,11 @@ Spree::Variant.class_eval do
     a = self.id
     currency = self.cost_currency
     # currency = "EUR" # HARDCODED
-    b = Spree::Price.where(:variant_id => a).where(:currency => currency).first.amount
+    if a.present?
+      b = Spree::Price.where(:variant_id => a).where(:currency => currency).first.amount
+    else
+      b = nil
+    end
     return b
   end
 
