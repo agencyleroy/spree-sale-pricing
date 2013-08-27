@@ -39,7 +39,11 @@ Spree::Product.class_eval do
   end
 
   def price
-    master.price
+    master.try(:price)
+  end
+
+  def potential_sale_price
+    master.potential_sale_price
   end
 
   def enable_sale(all_variants = true)

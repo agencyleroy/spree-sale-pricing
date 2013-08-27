@@ -31,8 +31,8 @@ Spree::Variant.class_eval do
 
   def original_price
     a = self.id
-    currency = self.cost_currency
-    # currency = "EUR" # HARDCODED
+    # currency = self.cost_currency
+    currency = "EUR" # HARDCODED
     if a.present?
       b = Spree::Price.where(:variant_id => a).where(:currency => currency).first.amount
     else
@@ -41,8 +41,14 @@ Spree::Variant.class_eval do
     return b
   end
 
-  def price
+  def potential_sale_price
     on_sale? ? sale_price : original_price
+  end
+
+  alias_method :orig_price_in, :price_in
+  def price_in(currency)
+    return orig_price_in(currency) unless sale_price.present?
+    Spree::Price.new(:variant_id => self.id, :amount => self.sale_price, :currency => currency)
   end
 
   def enable_sale
