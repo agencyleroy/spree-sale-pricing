@@ -9,8 +9,18 @@
       <td><%= link_to "Show Product", admin_product_variant_path(@sale_price.variant.product_id) %></td>
     </tr>
     <tr>
+      <td valign="top">Variant original price:</td>
+      <td>
+        <%= @sale_price.variant.original_price.to_f.round(2) %> &euro;
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">Force fixed price for this variant:</td>
+      <td><%= f.select :calculator_type, options_for_select([['Based on new master price', "Spree::Calculator::MasterDifferenceSalePriceCalculator"], ['Fixed price for variant', Spree::Calculator::DollarAmountSalePriceCalculator]]) %></td>
+    </tr>
+    <tr>
       <td valign="top">Value:</td>
-      <td><%= f.text_field :value, {"style" => "width:500px"} %></td>
+      <td><%= f.text_field :value, {"style" => "width:500px", "value" => "#{@sale_price.variant.potential_sale_price}"} %></td>
     </tr>
     <tr>
       <td valign="top">Enabled:</td>

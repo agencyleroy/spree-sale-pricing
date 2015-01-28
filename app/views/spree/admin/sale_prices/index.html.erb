@@ -33,13 +33,17 @@
           <%= sale.variant.product.name %>
         </td>
         <td>
-          <%= sale.value %>
+          <%= sale.variant.potential_sale_price %>
         </td>
         <td>
           <%= sale.variant.original_price if sale.variant.original_price.present? %>
         </td>
         <td>
-          <%= link_to "Edit sale", admin_sale_price_path(sale.id) %>
+          <% if sale.variant.is_master? %>
+            <%= link_to "Edit master sale", admin_sale_price_path(sale.id) %>
+          <% else %>
+            <%= link_to "Edit variant sale", admin_sale_price_path(sale.id) %>
+          <% end %>
         </td>
         <td>
           <%= sale.start_at.to_date %>
