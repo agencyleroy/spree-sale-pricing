@@ -10,8 +10,6 @@ module Spree
       where("enabled = true AND (start_at <= ? OR start_at IS NULL) AND (end_at >= ? OR end_at IS NULL)", Time.now, Time.now)
     }
 
-    attr_accessible :value, :start_at, :end_at, :enabled, :calculator_type
-
     # # TODO make this work or remove it
     # #def self.calculators
     # #  Rails.application.config.spree.calculators.send(self.to_s.tableize.gsub('/', '_').sub('spree_', ''))
