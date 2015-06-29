@@ -14,9 +14,9 @@ class Spree::Admin::SalePricesController < Spree::Admin::ResourceController
   def disable_sale
     @sale = Spree::Product.find(params[:sale_price_id])
     if @sale.stop_sale
-      redirect_to admin_product_path(@sale.permalink), notice: 'Sale was successfully stopped.'
+      redirect_to admin_product_path(@sale.slug), success: 'Sale was successfully stopped.'
     else
-      redirect_to admin_product_path(@sale.permalink)
+      redirect_to admin_product_path(@sale.slug)
     end
   end
 
@@ -35,7 +35,7 @@ class Spree::Admin::SalePricesController < Spree::Admin::ResourceController
 
     respond_to do |format|
       if @product.put_on_sale(@new_price)
-        format.html { redirect_to admin_product_path(@product), notice: 'Sale was successfully created.' }
+        format.html { redirect_to admin_product_path(@product), success: 'Sale was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
         format.html { render action: "new" }
