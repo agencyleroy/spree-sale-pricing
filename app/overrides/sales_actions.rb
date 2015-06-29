@@ -11,7 +11,7 @@ html = '
       <p><%= @product.original_price.to_f %></p>
       <% else %>
         <br />
-        <%= link_to "Enable Sale", admin_sale_price_enable_sale_path + "?product_id=#{@product.id}", :class => "button icon-plus" %>
+        <%= link_to "Enable Sale", new_admin_sale_price_path + "?product_id=#{@product.id}", :class => "button icon-plus" %>
       <% end %>
 </div>
   
