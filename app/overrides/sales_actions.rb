@@ -4,14 +4,14 @@ html = '
       <br />
       <% if @product.on_sale? == true %>
         <br />
-        <%= link_to "Disable Sale", admin_sale_price_disable_sale_path(@product.id), :class => "button icon-cancel" %>
+        <%= link_to "Disable Sale", "/admin/sale_prices/" + "#{@product.id}", :class => "button icon-cancel", method: "DELETE" %>
         <br /><br />
       <label>Original price:</label>
       <br />
       <p><%= @product.original_price.to_f %></p>
       <% else %>
         <br />
-        <%= link_to "Enable Sale", new_admin_sale_price_path + "?product_id=#{@product.id}", :class => "button icon-plus" %>
+        <%= link_to "Enable Sale", "/admin/sale_prices/new" + "?product_id=#{@product.id}", :class => "button icon-plus" %>
       <% end %>
 </div>
   
